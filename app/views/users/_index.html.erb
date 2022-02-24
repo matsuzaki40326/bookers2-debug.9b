@@ -13,12 +13,12 @@
         <td><%= user.name %></td>
         <td>
           <%= link_to user_followings_path(user) do %>
-          <%= user.followings.count %> フォロー
+          <%= user.followings.count %> <span class="small">follow</span>
           <% end %>
         </td>
         <td>
           <%= link_to user_followers_path(user) do %>
-          <%= user.followers.count %> フォロワー
+          <%= user.followers.count %> <span class="small">follower</span>
           <% end %>
         </td>
 
@@ -28,9 +28,9 @@
 
         <% unless user == current_user %>
          <% if current_user.following?(user) %>
-          <td><%= link_to "フォロー中", user_relationships_path(user.id), method: :delete, class: 'btn btn-primary btn-block' %></td>
+          <td><%= link_to "フォロー中", user_relationships_path(user.id), method: :delete, class: 'btn btn-primary btn-block btn-sm' %></td>
          <% else %>
-          <td><%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: 'btn btn-outline-primary btn-block' %></td>
+          <td><%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: 'btn btn-outline-primary btn-block btn-sm' %></td>
          <% end %>
         <% end %>
 
