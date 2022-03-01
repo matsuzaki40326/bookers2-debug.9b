@@ -16,6 +16,9 @@ class User < ApplicationRecord
 
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
+  
+  has_many :user_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy
 
   #フォローした時の処理
   def follow(user_id)
