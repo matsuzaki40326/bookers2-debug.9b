@@ -31,4 +31,7 @@ class Book < ApplicationRecord
       @book = Book.all
     end
   end
+  
+  scope :newest, -> {order(created_at: :desc)}
+  scope :review, -> {order(star: :desc)}
 end

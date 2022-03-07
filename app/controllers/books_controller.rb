@@ -18,6 +18,12 @@ class BooksController < ApplicationController
       a.favorited_users.includes(:favorites).where(created_at: from... to).size
      }
     @book = Book.new
+    if params[:sort_creat]
+      @books = Book.newest
+    end
+    if params[:sort_star]
+      @books = Book.review
+    end
   end
 
   def create
