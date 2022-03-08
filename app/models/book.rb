@@ -10,7 +10,8 @@ class Book < ApplicationRecord
     less_than_or_equal_to: 5,
     greater_than_or_equal_to: 1,
   }
-  
+  validates :category, presence: true
+
   is_impressionable counter_cache:
 
   def favorited_by?(user)
@@ -20,18 +21,22 @@ class Book < ApplicationRecord
   #検索方法の分岐
   def self.looks(search, word)
     if search == "perfect_match"
-      @book = Book.where("title LIKE?", "#{word}")
+      @book = Book.where("title LIKE? OR category LIKE?", "#{word}","#{word}")
     elsif search == "forward_match"
       @book = Book.where("title LIKE?", "#{word}%")
     elsif search == "backward_match"
       @book = Book.where("title LiKE?", "%#{word}")
     elsif search == "partial_match"
-      @book = Book.where("title LIKE?", "%#{word}%")
+      @book = Book.where("title LIKE? OR category LIKE?", "%#{word}%","%#{word}%")
     else
       @book = Book.all
     end
   end
-  
+
+  def self.search(search_word)
+    Book.where(['category LIKE?', "#{search_word}"])
+  end
+
   scope :newest, -> {order(created_at: :desc)}
   scope :review, -> {order(star: :desc)}
 end
