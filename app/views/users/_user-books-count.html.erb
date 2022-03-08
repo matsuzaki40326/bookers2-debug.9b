@@ -5,11 +5,11 @@
   <tr>
     <td><%= today.count %></td>
     <td><%= yesterday.count %></td>
-    <% if today.count == 0 || yesterday.count == 0 %>
-     <td>今日または前日の投稿がありません</td>
+    <% if yesterday.count == 0 %>
+     <td>前日の投稿がありません</td>
     <% else %>
      <td>
-     <%= (100 * today.count / yesterday.count - 100) %>%
+     <%= (100 * today.count / yesterday.count - 100).round %>%
      </td>
     <% end %>
   </tr>
@@ -21,11 +21,11 @@
   <tr>
     <td><%= this_week.count %></td>
     <td><%= last_week.count %></td>
-     <% if this_week.count == 0 || last_week.count == 0 %>
-      <td>今週または先週の投稿がありません</td>
+     <% if last_week.count == 0 %>
+      <td>前週の投稿がありません</td>
      <% else %>
        <td>
-       <%= (100 * this_week.count / last_week.count).round %>%
+       <%= (100 * this_week.count / last_week.count - 100).round %>%
        </td>
      <% end %>
   </tr>
