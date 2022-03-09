@@ -5,7 +5,7 @@
 
 require('jquery')
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+// import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "jquery"
@@ -17,7 +17,11 @@ import "../stylesheets/application"
 window.$ = window.jQuery = require('jquery');
 require('packs/raty')
 
+require("chartkick")
+import Chart from "chart.js/auto";
+global.Chart = Chart;
+
 
 Rails.start()
-Turbolinks.start()
+// Turbolinks.start()
 ActiveStorage.start()
